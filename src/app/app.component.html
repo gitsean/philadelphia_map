@@ -1,12 +1,13 @@
 <h1>
   {{title}}
 </h1>
-
+<app-search-component></app-search-component>
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
   <agm-data-layer *ngIf="wardDataObject" [geoJson]="wardDataObject" [style]="wardStyle" >
      
   </agm-data-layer>
   <agm-data-layer *ngIf="wardDataObject && divisionDataObject" [geoJson]="divisionDataObject" (layerClick)="clicked($event)" [style]="divisionStyle" >
   </agm-data-layer> 
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
   
 </agm-map>
