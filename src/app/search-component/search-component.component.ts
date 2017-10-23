@@ -23,9 +23,13 @@ export class SearchComponentComponent implements OnInit {
     private ngZone: NgZone
   ) { }  
 
+  clickity(event){
+    console.log(event);
+  }
+
   ngOnInit() {
     this.searchControl = new FormControl();
-    this.setCurrentPosition();
+    this.setCurrentPosition(39.952583,-75.165222);
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       console.log('google maps: ', google.maps);
@@ -33,6 +37,7 @@ export class SearchComponentComponent implements OnInit {
         types: ["address"]
       });
       autocomplete.addListener("place_changed", () => {
+        
         this.ngZone.run(() => {
           //get the place result
 
@@ -42,23 +47,31 @@ export class SearchComponentComponent implements OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
+          
+          console.log('hit here too...', place.geometry.location.lat());
 
           //set latitude, longitude and zoom
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng();
           this.zoom = 12;
+          this.setCurrentPosition(this.lat, this.lng);
         });
       });
     });
   }
 
-  private setCurrentPosition() {
+  private setCurrentPosition(lat, lng) {
+    console.log('called...');
     if ("geolocation" in navigator) {
+      this.lat = lat;
+      this.lng = lng;
+      this.zoom = 12;
       navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position.coords);
         // this.lat = position.coords.latitude;
         // this.lng = position.coords.longitude;
-        this.lat = 39.952583;
-        this.lng = -75.165222;
+        this.lat = lat;
+        this.lng = lng;
         this.zoom = 12;
       });
     }

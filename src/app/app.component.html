@@ -3,6 +3,7 @@
 </h1>
 <app-search-component></app-search-component>
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+  
   <agm-data-layer *ngIf="wardDataObject" [geoJson]="wardDataObject" [style]="wardStyle" >
      
   </agm-data-layer>
