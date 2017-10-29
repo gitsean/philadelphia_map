@@ -67,16 +67,20 @@ export class SearchComponentComponent implements OnInit {
     if ("geolocation" in navigator) {
       // this.lat = lat;
       // this.lng = lng;
-      this.zoom = 12;
+      // this.zoom = 12;
       navigator.geolocation.getCurrentPosition((position) => {
         console.log('HONK : ', position.coords);
+        console.log(lat, lng);
         // this.lat = position.coords.latitude;
         // this.lng = position.coords.longitude;
         
-        this._searchMapService.setLatLng(lat, lng);
+        this._searchMapService.lat = lat;
+        this._searchMapService.lng = lng;
+        //this._searchMapService.setLatLng(lat, lng);
+        
         // this.lat = position.coords.latitude;
         // this.lng = position.coords.longitude;
-        this.zoom = 12;
+        // this.zoom = 12;
       });
     }
   }
