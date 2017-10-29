@@ -3,6 +3,4 @@ html, body {
     margin: 0;
     padding: 0;
   }
-  app-root, agm-map {
-    height: 500px;
-  }
+  

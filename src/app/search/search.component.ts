@@ -4,9 +4,9 @@ import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 
 @Component({
-  selector: 'app-search-component',
-  templateUrl: './search-component.component.html',
-  styleUrls: ['./search-component.component.css']
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
 })
 export class SearchComponentComponent implements OnInit {
 
@@ -21,7 +21,7 @@ export class SearchComponentComponent implements OnInit {
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone
-  ) { }  
+  ) { console.log('hello i am the search component.'); }  
 
   clickity(event){
     console.log(event);
@@ -67,11 +67,11 @@ export class SearchComponentComponent implements OnInit {
       this.lng = lng;
       this.zoom = 12;
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position.coords);
+        console.log('HONK : ', position.coords);
         // this.lat = position.coords.latitude;
         // this.lng = position.coords.longitude;
-        this.lat = lat;
-        this.lng = lng;
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
         this.zoom = 12;
       });
     }
