@@ -1,4 +1,9 @@
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+
+<p>LAT: {{_searchMapService.lat}}</p>
+<p>LNG: {{_searchMapService.lng}}</p>
+<p>{{zoom}}</p>
+
+<agm-map [latitude]="_searchMapService.lat" [longitude]="_searchMapService.lng" [zoom]="zoom">
   
   <agm-data-layer 
     *ngIf="wardDataObject" 
@@ -12,8 +17,8 @@
     [style]="divisionStyle" >
   </agm-data-layer> 
   <agm-marker 
-    [latitude]="lat" 
-    [longitude]="lng">
+    [latitude]="_searchMapService.lat" 
+    [longitude]="_searchMapService.lng">
   </agm-marker>
   
 </agm-map>

@@ -1,21 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { PolDataService } from "../poldata.service";
+import { PolDataService } from '../poldata.service';
+import { SearchMapService } from '../search-map.service';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
-  providers: [ PolDataService ]
+  providers: [ PolDataService, SearchMapService ]
 })
 export class MapComponent implements OnInit {
-  lat: number = 39.952583;
-  lng: number = -75.165222;
+  // lat: number = this._searchMapService.lat;
+  // lng: number = this._searchMapService.lng;
   zoom: number = 14;
   wardDataObject: Object;
   divisionDataObject: Object;
 
   constructor(
-    private _polDataService: PolDataService
+    public _polDataService: PolDataService,
+    public _searchMapService: SearchMapService
   ) { }
 
   // function to consume  observable
@@ -23,14 +25,12 @@ export class MapComponent implements OnInit {
     this._polDataService.getWardData()
       .subscribe(resWardData => {
         this.wardDataObject = resWardData;
-        console.log(this.wardDataObject);
       });
   }
   getDivisionData(): void {
     this._polDataService.getDivisionData()
       .subscribe(resDivisionData => {
         this.divisionDataObject = resDivisionData;
-        console.log(this.divisionDataObject);
       });
   }
   // on init lifecycle hook
