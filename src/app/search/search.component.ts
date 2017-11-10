@@ -10,7 +10,7 @@ import { MapsAPILoader } from '@agm/core';
   styleUrls: ['./search.component.css'],
   providers: [ SearchMapService ]
 })
-export class SearchComponentComponent implements OnInit {
+export class SearchComponent implements OnInit {
 
   // public lat: number = 39.952583;
   // public lng: number = -75.165222;
@@ -18,6 +18,7 @@ export class SearchComponentComponent implements OnInit {
   public searchControl: FormControl;
 
   @ViewChild("search")
+  
   public searchElementRef: ElementRef;
 
   constructor(
@@ -63,24 +64,14 @@ export class SearchComponentComponent implements OnInit {
   }
 
   private setCurrentPosition(lat, lng) {
-    console.log('called...');
+    console.log('Setting Position ');
+    console.log('lat: ', lat);
+    console.log('lng: ', lng);
     if ("geolocation" in navigator) {
-      // this.lat = lat;
-      // this.lng = lng;
-      // this.zoom = 12;
+
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log('HONK : ', position.coords);
-        console.log(lat, lng);
-        // this.lat = position.coords.latitude;
-        // this.lng = position.coords.longitude;
-        
         this._searchMapService.lat = lat;
         this._searchMapService.lng = lng;
-        //this._searchMapService.setLatLng(lat, lng);
-        
-        // this.lat = position.coords.latitude;
-        // this.lng = position.coords.longitude;
-        // this.zoom = 12;
       });
     }
   }
