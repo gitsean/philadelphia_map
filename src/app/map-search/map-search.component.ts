@@ -53,7 +53,11 @@ export class MapSearchComponent implements OnInit {
   ) { }
 
   clicked(event){
-    console.log(event);
+    let data = event.feature.f.DIVISION_NUM;
+    let selected_ward = data.substring(0,2);
+    let selected_division = data.substring(2);
+    console.log('Ward: ', selected_ward);
+    console.log('Division: ', selected_division);
   }
 
   // function to consume  observable
