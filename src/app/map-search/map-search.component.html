@@ -15,11 +15,11 @@
 <!-- Break -->
 
 <agm-map 
+  [styles]="mapStyles"
   [latitude]="coordinates.lat" 
   [longitude]="coordinates.lng" 
   [zoom]="zoom"
-  backgroundColor="orange"
-  disableDefaultUI="true">
+  >
   
   <agm-data-layer 
     *ngIf="wardDataObject" 

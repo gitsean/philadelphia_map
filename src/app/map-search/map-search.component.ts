@@ -22,6 +22,17 @@ export class MapSearchComponent implements OnInit {
   wardDataObject: Object;
   divisionDataObject: Object;
   subscription: Subscription;
+  public mapStyles = [
+    {
+    "featureType": "poi",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+      ]
+    }
+  ];
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
