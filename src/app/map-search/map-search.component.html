@@ -1,0 +1,43 @@
+<div class="form-group">
+  
+    <p>LAT: {{coordinates.lat}}</p>
+    <p>LNG: {{coordinates.lng}}</p>
+    <p>ZOOM: {{zoom}}</p>
+
+  <input 
+    placeholder="search for location" 
+    autocorrect="off" 
+    autocapitalize="off" 
+    spellcheck="off" 
+    type="text" 
+    class="form-control" 
+    #search 
+    [formControl]="searchControl"
+  >
+</div>
+
+<!-- Break -->
+
+<p>LAT: {{coordinates.lat}}</p>
+<p>LNG: {{coordinates.lng}}</p>
+<p>ZOOM: {{zoom}}</p>
+
+<agm-map [latitude]="coordinates.lat" [longitude]="coordinates.lng" [zoom]="zoom">
+  
+  <agm-data-layer 
+    *ngIf="wardDataObject" 
+    [geoJson]="wardDataObject" 
+    [style]="wardStyle" >
+  </agm-data-layer>
+  <agm-data-layer 
+    *ngIf="wardDataObject && divisionDataObject" 
+    [geoJson]="divisionDataObject" 
+    (layerClick)="clicked($event)" 
+    [style]="divisionStyle" >
+  </agm-data-layer> 
+  <agm-marker 
+    [latitude]="coordinates.lat" 
+    [longitude]="coordinates.lng">
+  </agm-marker>
+  
+</agm-map>
