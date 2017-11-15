@@ -5,15 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
-import { SearchComponent } from './search/search.component';
-import { MapComponent } from './map/map.component';
 import { MapSearchComponent } from './map-search/map-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent,
-    MapComponent,
     MapSearchComponent
   ],
   imports: [

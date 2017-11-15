@@ -1,8 +1,4 @@
 <div class="form-group">
-  
-    <p>LAT: {{coordinates.lat}}</p>
-    <p>LNG: {{coordinates.lng}}</p>
-    <p>ZOOM: {{zoom}}</p>
 
   <input 
     placeholder="search for location" 
@@ -18,11 +14,12 @@
 
 <!-- Break -->
 
-<p>LAT: {{coordinates.lat}}</p>
-<p>LNG: {{coordinates.lng}}</p>
-<p>ZOOM: {{zoom}}</p>
-
-<agm-map [latitude]="coordinates.lat" [longitude]="coordinates.lng" [zoom]="zoom">
+<agm-map 
+  [latitude]="coordinates.lat" 
+  [longitude]="coordinates.lng" 
+  [zoom]="zoom"
+  backgroundColor="orange"
+  disableDefaultUI="true">
   
   <agm-data-layer 
     *ngIf="wardDataObject" 
