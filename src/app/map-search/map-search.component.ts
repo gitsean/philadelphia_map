@@ -24,14 +24,25 @@ export class MapSearchComponent implements OnInit {
   subscription: Subscription;
   public mapStyles = [
     {
-    "featureType": "poi",
-    "elementType": "labels",
-    "stylers": [
+    featureType: "poi",
+    elementType: "labels",
+    stylers: [
       {
-        "visibility": "off"
+        visibility: "off"
       }
       ]
+    },
+    {
+      featureType: "transit",
+      elementType: "labels",
+      stylers: [{visibility: "off"}]
+    },
+    {
+      featureType: 'road',
+      elementType: 'labels.icon',
+      stylers: [{visibility: 'off'}]
     }
+
   ];
 
   constructor(
@@ -40,6 +51,10 @@ export class MapSearchComponent implements OnInit {
     public _polDataService: PolDataService,
     public _searchMapService: SearchMapService
   ) { }
+
+  clicked(event){
+    console.log(event);
+  }
 
   // function to consume  observable
   getWardData(): void {
