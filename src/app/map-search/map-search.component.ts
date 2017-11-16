@@ -5,13 +5,15 @@ import { PolDataService } from '../poldata.service';
 import { MapsAPILoader } from '@agm/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs/Rx';
 import { SearchMapService } from '../search-map.service';
+import { CommitteePersonService } from '../committee-person.service';
 
 @Component({
   selector: 'map-search',
   templateUrl: './map-search.component.html',
   styleUrls: ['./map-search.component.css'],
-  providers: [ PolDataService, SearchMapService ]
+  providers: [ PolDataService, SearchMapService, CommitteePersonService ]
 })
+
 export class MapSearchComponent implements OnInit {
 
   zoom: number = 14;
@@ -20,6 +22,7 @@ export class MapSearchComponent implements OnInit {
   public searchElementRef: ElementRef;
   public coordinates: any;
   wardDataObject: Object;
+  committeePeople: Object;
   divisionDataObject: Object;
   subscription: Subscription;
   public mapStyles = [
@@ -49,15 +52,20 @@ export class MapSearchComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     public _polDataService: PolDataService,
-    public _searchMapService: SearchMapService
+    public _searchMapService: SearchMapService,
+    public _committeePersonService: CommitteePersonService
   ) { }
 
   clicked(event){
     let data = event.feature.f.DIVISION_NUM;
-    let selected_ward = data.substring(0,2);
-    let selected_division = data.substring(2);
-    console.log('Ward: ', selected_ward);
-    console.log('Division: ', selected_division);
+    let ward = data.substring(0,2);
+    let division = data.substring(2);
+
+    this._committeePersonService.getCommitteePersonData(ward, division)
+      .subscribe(resCommitteePerson => {
+        this.committeePeople = resCommitteePerson['rows'];
+        console.log(this.committeePeople);
+      });
   }
 
   // function to consume  observable
