@@ -24,8 +24,10 @@ export class MapSearchComponent implements OnInit {
   public coordinates: LatLng;
   public infoCoordinates: LatLng;
   public showInfo: boolean;
+  division: number;
+  ward: number;
   wardDataObject: Object;
-  committeePeople: Object;
+  committeePeople: Array<Object>;
   divisionDataObject: Object;
   subscription: Subscription;
   public mapStyles = [
@@ -75,6 +77,8 @@ export class MapSearchComponent implements OnInit {
     let data = event.feature.f.DIVISION_NUM;
     let ward = data.substring(0,2);
     let division = data.substring(2);
+    this.ward = ward;
+    this.division = division;
     this.infoCoordinates = {
       lat: event.latLng.lat(),
       lng: event.latLng.lng()

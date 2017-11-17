@@ -26,9 +26,11 @@
     [isOpen]="showInfo" 
     [latitude]="infoCoordinates?.lat" 
     [longitude]="infoCoordinates?.lng" 
+    [panOnOpen]="true"
     >
     <ng-template>
-      My first Snazzy Info Window!
+      <span>Ward: {{ward}}</span> | <span>Division: {{division}}</span>
+      <div *ngFor="let person of committeePeople">{{person.name}} - {{person.party}}</div>
     </ng-template>
   </agm-snazzy-info-window>
   <agm-data-layer 

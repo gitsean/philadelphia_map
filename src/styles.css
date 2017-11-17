@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+.si-content {
+    max-width: 300px;
+    max-height: 123px;
+}
