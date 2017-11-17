@@ -6,6 +6,7 @@ import { MapsAPILoader } from '@agm/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs/Rx';
 import { SearchMapService } from '../search-map.service';
 import { CommitteePersonService } from '../committee-person.service';
+import { LatLng } from './latLng';
 
 @Component({
   selector: 'map-search',
@@ -20,7 +21,9 @@ export class MapSearchComponent implements OnInit {
   searchControl: FormControl;
   @ViewChild("search")
   public searchElementRef: ElementRef;
-  public coordinates: any;
+  public coordinates: LatLng;
+  public infoCoordinates: LatLng;
+  public showInfo: boolean;
   wardDataObject: Object;
   committeePeople: Object;
   divisionDataObject: Object;
@@ -56,16 +59,29 @@ export class MapSearchComponent implements OnInit {
     public _committeePersonService: CommitteePersonService
   ) { }
 
+  divisionSelect(ward, division){
+    
+    
+    this._committeePersonService.getCommitteePersonData(ward, division)
+      .subscribe(resCommitteePerson => {
+        this.committeePeople = resCommitteePerson['rows'];
+        
+        console.log(this.committeePeople);
+      });
+
+  }
+
   clicked(event){
     let data = event.feature.f.DIVISION_NUM;
     let ward = data.substring(0,2);
     let division = data.substring(2);
-
-    this._committeePersonService.getCommitteePersonData(ward, division)
-      .subscribe(resCommitteePerson => {
-        this.committeePeople = resCommitteePerson['rows'];
-        console.log(this.committeePeople);
-      });
+    this.infoCoordinates = {
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng()
+    }
+    this.showInfo = true;
+    console.log('infoCoords: -------------------> ', this.infoCoordinates);
+    this.divisionSelect(ward, division);
   }
 
   // function to consume  observable
@@ -86,7 +102,8 @@ export class MapSearchComponent implements OnInit {
     this.getWardData();
     this.getDivisionData();
     this.subscription = this._searchMapService.navItem$
-    .subscribe((item) => {
+    .subscribe((item: LatLng) => {
+      console.log('ITEM: ', item);
       this.coordinates = item;
     })
     this.searchControl = new FormControl();
@@ -107,6 +124,8 @@ export class MapSearchComponent implements OnInit {
 
           let lat = place.geometry.location.lat();
           let lng = place.geometry.location.lng();
+          this.infoCoordinates.lat = lat;
+          this.infoCoordinates.lng = lng;
           
           this._searchMapService.setLatLng(lat, lng);
 

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { MapSearchComponent } from './map-search/map-search.component';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MapSearchComponent } from './map-search/map-search.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCG_7VM4OEqhGkcaxucOGw53qSwbM0qyD8',
       libraries: ["places"]
-    })
+    }),
+    AgmSnazzyInfoWindowModule
   ],
   providers: [],
   bootstrap: [AppComponent]

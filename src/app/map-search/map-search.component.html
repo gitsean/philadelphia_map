@@ -14,13 +14,23 @@
 
 <!-- Break -->
 
+<p>Show = {{showInfo}}</p>
+
 <agm-map 
   [styles]="mapStyles"
   [latitude]="coordinates.lat" 
   [longitude]="coordinates.lng" 
   [zoom]="zoom"
   >
-  
+  <agm-snazzy-info-window 
+    [isOpen]="showInfo" 
+    [latitude]="infoCoordinates?.lat" 
+    [longitude]="infoCoordinates?.lng" 
+    >
+    <ng-template>
+      My first Snazzy Info Window!
+    </ng-template>
+  </agm-snazzy-info-window>
   <agm-data-layer 
     *ngIf="wardDataObject" 
     [geoJson]="wardDataObject" 
@@ -32,9 +42,9 @@
     (layerClick)="clicked($event)" 
     [style]="divisionStyle" >
   </agm-data-layer> 
-  <agm-marker 
+  <!-- <agm-marker 
     [latitude]="coordinates.lat" 
     [longitude]="coordinates.lng">
-  </agm-marker>
+  </agm-marker> -->
   
 </agm-map>
