@@ -79,7 +79,6 @@ export class MapSearchComponent implements OnInit {
       lng: event.latLng.lng()
     }
     this.showInfo = true;
-    console.log('infoCoords: -------------------> ', this.infoCoordinates);
     this.divisionSelect(ward, division);
   }
 
@@ -102,7 +101,6 @@ export class MapSearchComponent implements OnInit {
     this.getDivisionData();
     this.subscription = this._searchMapService.navItem$
     .subscribe((item: LatLng) => {
-      console.log('ITEM: ', item);
       this.coordinates = item;
       this.infoCoordinates = item;
     })
@@ -121,11 +119,9 @@ export class MapSearchComponent implements OnInit {
             return;
           }
 
-          console.log('PLACE: ', place);
           // TODO: set the popup and open on place change
           let lat = place.geometry.location.lat();
           let lng = place.geometry.location.lng();
-          console.log('lat: ', lat);
           this.infoCoordinates.lat = lat;
           this.infoCoordinates.lng = lng;
           this._searchMapService.setLatLng(lat, lng);
