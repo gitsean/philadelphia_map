@@ -122,7 +122,7 @@ export class MapSearchComponent implements OnInit {
           }
 
           console.log('PLACE: ', place);
-
+          // TODO: set the popup and open on place change
           let lat = place.geometry.location.lat();
           let lng = place.geometry.location.lng();
           console.log('lat: ', lat);
