@@ -18,5 +18,4 @@ export class PolDataService {
   getDivisionData() {
     return this._http.get(this._divisionsUrl);
   }
-  
 }

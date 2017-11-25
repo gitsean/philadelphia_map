@@ -62,15 +62,10 @@ export class MapSearchComponent implements OnInit {
   ) { }
 
   divisionSelect(ward, division){
-    
-    
     this._committeePersonService.getCommitteePersonData(ward, division)
       .subscribe(resCommitteePerson => {
         this.committeePeople = resCommitteePerson['rows'];
-        
-        console.log(this.committeePeople);
       });
-
   }
 
   clicked(event){
@@ -109,6 +104,7 @@ export class MapSearchComponent implements OnInit {
     .subscribe((item: LatLng) => {
       console.log('ITEM: ', item);
       this.coordinates = item;
+      this.infoCoordinates = item;
     })
     this.searchControl = new FormControl();
     // load Places Autocomplete
@@ -117,7 +113,6 @@ export class MapSearchComponent implements OnInit {
         types: ["address"]
       });
       autocomplete.addListener("place_changed", () => {
-        
         this.ngZone.run(() => {
           //get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
@@ -126,11 +121,13 @@ export class MapSearchComponent implements OnInit {
             return;
           }
 
+          console.log('PLACE: ', place);
+
           let lat = place.geometry.location.lat();
           let lng = place.geometry.location.lng();
+          console.log('lat: ', lat);
           this.infoCoordinates.lat = lat;
           this.infoCoordinates.lng = lng;
-          
           this._searchMapService.setLatLng(lat, lng);
 
         });

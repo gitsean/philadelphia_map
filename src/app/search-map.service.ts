@@ -17,7 +17,7 @@ export class SearchMapService {
 
   constructor() { }
 
-  setLatLng(lat : number, lng : number){
+  setLatLng(lat, lng){
     console.log('service changing the behaviorsubject.')
     this._position.next({
       lat: lat,

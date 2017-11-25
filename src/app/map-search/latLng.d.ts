@@ -1,4 +1,4 @@
 export interface LatLng {
-    lat: any,
-    lng: any
+    lat: number,
+    lng: number
 }

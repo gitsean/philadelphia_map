@@ -27,9 +27,11 @@
     [latitude]="infoCoordinates?.lat" 
     [longitude]="infoCoordinates?.lng" 
     [panOnOpen]="true"
+    [maxWidth]="360"
     >
     <ng-template>
-      <span>Ward: {{ward}}</span> | <span>Division: {{division}}</span>
+      <div>Ward: {{ward}}</div><div>Division: {{division}}</div>
+      <hr />
       <div *ngFor="let person of committeePeople">{{person.name}} - {{person.party}}</div>
     </ng-template>
   </agm-snazzy-info-window>
